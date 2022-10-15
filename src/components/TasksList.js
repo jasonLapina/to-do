@@ -4,11 +4,17 @@ import classes from '../scss/TasksList.module.scss';
 
 const TasksList = () => {
   const ctx = useContext(TodoContext);
-
+  const completeHandler = (e) => {
+    e.target.classList.toggle(classes.completed);
+  };
   return (
     <ul className={classes.tasks}>
       {ctx.tasks.map((task, i) => {
-        return <li key={i}>{task}</li>;
+        return (
+          <li onClick={completeHandler} key={i}>
+            {task}
+          </li>
+        );
       })}
     </ul>
   );

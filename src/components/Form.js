@@ -8,8 +8,12 @@ const Form = () => {
     setInputValue(inputRef.current.value);
   };
   const [inputValue, setInputValue] = useState('');
+  const submitHandler = (e) => {
+    ctx.onAdd(e);
+    setInputValue('');
+  };
   return (
-    <form onSubmit={ctx.onAdd} className={classes.form}>
+    <form onSubmit={submitHandler} className={classes.form}>
       <input
         onChange={changeHandler}
         value={inputValue}

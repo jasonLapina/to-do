@@ -9,7 +9,7 @@ function App() {
       <Form />
       <TasksList />
       <small className='small'>
-        Left click to mark as completed. Right click to delete task
+        Left click to mark as completed. Right click to delete task.
       </small>
     </main>
   );
