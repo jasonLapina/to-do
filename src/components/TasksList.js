@@ -11,7 +11,7 @@ const TasksList = () => {
     <ul className={classes.tasks}>
       {ctx.tasks.map((task, i) => {
         return (
-          <li onClick={completeHandler} key={i}>
+          <li onContextMenu={ctx.onRemove} onClick={completeHandler} key={i}>
             {task}
           </li>
         );

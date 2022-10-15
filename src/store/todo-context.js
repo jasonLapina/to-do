@@ -4,7 +4,6 @@ const TodoContext = createContext({
   tasks: [],
   onAdd: () => {},
   onRemove: () => {},
-  onComplete: () => {},
   onShow: () => {},
 });
 
@@ -15,16 +14,17 @@ export const TodoContextProvider = (props) => {
     const inputEl = e.target.querySelector('input');
     setTasks([inputEl.value, ...tasks]);
   };
-  const completeTaskHandler = (e) => {};
-  const removeTaskHandler = () => {
-    console.log(`task removed `);
+
+  const removeTaskHandler = (e) => {
+    e.preventDefault();
+    const newList = tasks.pop(e.target.value);
+    setTasks([newList]);
   };
   return (
     <TodoContext.Provider
       value={{
         tasks: tasks,
         onAdd: addTaskHandler,
-        onComplete: completeTaskHandler,
         onRemove: removeTaskHandler,
       }}
     >
