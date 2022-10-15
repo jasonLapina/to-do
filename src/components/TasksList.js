@@ -8,11 +8,7 @@ const TasksList = () => {
   return (
     <ul className={classes.tasks}>
       {ctx.tasks.map((task, i) => {
-        return (
-          <li key={i}>
-            <p key={i + 1}>{task}</p>
-          </li>
-        );
+        return <li key={i}>{task}</li>;
       })}
     </ul>
   );

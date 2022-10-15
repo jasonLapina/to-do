@@ -1,15 +1,15 @@
-import { createContext } from 'react';
+import { createContext, useReducer, useState } from 'react';
 
-const TodoContext = createContext({
-  tasks: [],
-  onAdd: () => {},
-  onComplete: () => {},
-  onRemove: () => {},
-});
+const TodoContext = createContext();
 
 export const TodoContextProvider = (props) => {
-  const addTaskHandler = () => {
-    console.log(`task added `);
+  const [tasks, setTasks] = useState(['first', 'second']);
+  const addTaskHandler = (e) => {
+    e.preventDefault();
+    const inputEl = e.target.querySelector('input');
+    setTasks([...tasks, inputEl.value]);
+    // RESETS INPUT FIELD AFTER SUBMISSION //
+    inputEl.value = '';
   };
   const completeTaskHandler = () => {
     console.log(`task completed `);
@@ -20,7 +20,7 @@ export const TodoContextProvider = (props) => {
   return (
     <TodoContext.Provider
       value={{
-        tasks: ['first task', `second task`, `third task`],
+        tasks: tasks,
         onAdd: addTaskHandler,
         onComplete: completeTaskHandler,
         onRemove: removeTaskHandler,
