@@ -8,13 +8,20 @@ const TodoContext = createContext({
 });
 
 export const TodoContextProvider = (props) => {
-  const [tasks, setTasks] = useState([]);
+  const tasksLocal = JSON.parse(localStorage.getItem('tasks'));
+  /// update local storage and tasks array ///
+  const updateLS = (updatedTasks) => {
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+  const [tasks, setTasks] = useState(tasksLocal ? tasksLocal : []);
 
   /////ADD TASK
   const addTaskHandler = (e) => {
     e.preventDefault();
     const inputEl = e.target.querySelector('input');
-    setTasks([inputEl.value, ...tasks]);
+    const updatedTasks = [inputEl.value, ...tasks];
+    updateLS(updatedTasks);
   };
   /////REMOVE TASK
   const removeTaskHandler = (e) => {
@@ -24,7 +31,7 @@ export const TodoContextProvider = (props) => {
     } else {
       const target = e.target.innerHTML;
       const updatedTasks = tasks.filter((task) => task != target);
-      setTasks(updatedTasks);
+      updateLS(updatedTasks);
     }
   };
   return (
