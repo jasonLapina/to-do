@@ -5,12 +5,14 @@ const TodoContext = createContext({
   tasks: [],
   onAdd: () => {},
   onRemove: () => {},
+  onComplete: () => {},
   onShow: () => {},
 });
 
 export const TodoContextProvider = (props) => {
   const tasksLocal = JSON.parse(localStorage.getItem('tasks'));
-  /// update local storage and tasks array ///
+
+  /////////// UPDATE LOCAL STORAGE AND TASKS ARRAY //////////
   const updateLS = (updatedTasks) => {
     setTasks(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -20,17 +22,26 @@ export const TodoContextProvider = (props) => {
   /////ADD TASK
   const addTaskHandler = (e) => {
     e.preventDefault();
-
     const inputEl = e.target.querySelector('input');
     if (inputEl.value.trim().length == 0) return;
     const updatedTasks = [{ text: inputEl.value, completed: false }, ...tasks];
     updateLS(updatedTasks);
   };
+
   /////REMOVE TASK
   const removeTaskHandler = (e) => {
     e.preventDefault();
-    const target = e.target.innerHTML;
-    const updatedTasks = tasks.filter((entry) => entry.text !== target);
+    const text = e.target.innerHTML;
+    const updatedTasks = tasks.filter((entry) => entry.text !== text);
+    updateLS(updatedTasks);
+  };
+
+  const completeTaskHandler = (e) => {
+    const text = e.target.innerHTML;
+    const index = tasks.map((entry) => entry.text).indexOf(text);
+    tasks[index].completed = !tasks[index].completed;
+
+    const updatedTasks = [...tasks];
     updateLS(updatedTasks);
   };
   return (
@@ -39,6 +50,7 @@ export const TodoContextProvider = (props) => {
         tasks: tasks,
         onAdd: addTaskHandler,
         onRemove: removeTaskHandler,
+        onComplete: completeTaskHandler,
       }}
     >
       {props.children}

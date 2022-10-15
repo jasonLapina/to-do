@@ -6,14 +6,18 @@ const TasksList = () => {
   const ctx = useContext(TodoContext);
 
   //////ADD STRIKETHROUGH TO TASK
-  const completeHandler = (e) => {
-    e.target.classList.toggle(classes.completed);
-  };
+
   return (
     <ul className={classes.tasks}>
       {ctx.tasks.map((task, i) => {
+        const style = task.completed ? classes.completed : '';
         return (
-          <li onContextMenu={ctx.onRemove} onClick={completeHandler} key={i}>
+          <li
+            className={style}
+            onClick={ctx.onComplete}
+            onContextMenu={ctx.onRemove}
+            key={i}
+          >
             {task.text}
           </li>
         );
