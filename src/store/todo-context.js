@@ -23,9 +23,8 @@ export const TodoContextProvider = (props) => {
       setTasks([]);
     } else {
       const target = e.target.innerHTML;
-      const index = tasks.indexOf(target);
-      const newTasks = tasks.splice(index, 1);
-      setTasks(newTasks);
+      const updatedTasks = tasks.filter((task) => task != target);
+      setTasks(updatedTasks);
     }
   };
   return (
