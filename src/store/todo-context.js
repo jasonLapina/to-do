@@ -8,17 +8,25 @@ const TodoContext = createContext({
 });
 
 export const TodoContextProvider = (props) => {
-  const [tasks, setTasks] = useState(['first', 'second']);
+  const [tasks, setTasks] = useState([]);
+
+  /////ADD TASK
   const addTaskHandler = (e) => {
     e.preventDefault();
     const inputEl = e.target.querySelector('input');
     setTasks([inputEl.value, ...tasks]);
   };
-
+  /////REMOVE TASK
   const removeTaskHandler = (e) => {
     e.preventDefault();
-    const newList = tasks.pop(e.target.value);
-    setTasks([newList]);
+    if (tasks.length === 1) {
+      setTasks([]);
+    } else {
+      const target = e.target.innerHTML;
+      const index = tasks.indexOf(target);
+      const newTasks = tasks.splice(index, 1);
+      setTasks(newTasks);
+    }
   };
   return (
     <TodoContext.Provider

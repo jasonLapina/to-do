@@ -4,6 +4,8 @@ import classes from '../scss/TasksList.module.scss';
 
 const TasksList = () => {
   const ctx = useContext(TodoContext);
+
+  //////ADD STRIKETHROUGH TO TASK
   const completeHandler = (e) => {
     e.target.classList.toggle(classes.completed);
   };
