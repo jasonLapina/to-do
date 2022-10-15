@@ -1,0 +1,11 @@
+.form {
+  input {
+    padding: 2rem 4rem;
+    font-size: 3rem;
+    border: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  }
+  input::placeholder {
+    color: var(--color-grey-dark);
+  }
+}

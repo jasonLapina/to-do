@@ -1,0 +1,24 @@
+.container {
+  max-width: 150rem;
+  background-color: var(--color-primary);
+  margin: 8rem auto;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+  /* TEMPORARY HEIGHT */
+  height: 80rem;
+  padding: 4rem 6rem;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+
+  h1 {
+    text-align: center;
+    font-size: 6rem;
+    letter-spacing: 2px;
+  }
+}
+
+.small {
+  font-size: 1.8rem;
+  align-self: end;
+  letter-spacing: 1px;
+}
