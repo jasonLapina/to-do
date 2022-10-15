@@ -14,7 +14,7 @@ const TasksList = () => {
       {ctx.tasks.map((task, i) => {
         return (
           <li onContextMenu={ctx.onRemove} onClick={completeHandler} key={i}>
-            {task}
+            {task.text}
           </li>
         );
       })}

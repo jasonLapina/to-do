@@ -1,3 +1,4 @@
+import { click } from '@testing-library/user-event/dist/click';
 import { createContext, useReducer, useState } from 'react';
 
 const TodoContext = createContext({
@@ -19,20 +20,18 @@ export const TodoContextProvider = (props) => {
   /////ADD TASK
   const addTaskHandler = (e) => {
     e.preventDefault();
+
     const inputEl = e.target.querySelector('input');
-    const updatedTasks = [inputEl.value, ...tasks];
+    if (inputEl.value.trim().length == 0) return;
+    const updatedTasks = [{ text: inputEl.value, completed: false }, ...tasks];
     updateLS(updatedTasks);
   };
   /////REMOVE TASK
   const removeTaskHandler = (e) => {
     e.preventDefault();
-    if (tasks.length === 1) {
-      setTasks([]);
-    } else {
-      const target = e.target.innerHTML;
-      const updatedTasks = tasks.filter((task) => task != target);
-      updateLS(updatedTasks);
-    }
+    const target = e.target.innerHTML;
+    const updatedTasks = tasks.filter((entry) => entry.text !== target);
+    updateLS(updatedTasks);
   };
   return (
     <TodoContext.Provider
